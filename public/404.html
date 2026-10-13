@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting — Superb Apex Digital</title>
+    <script>
+      // Single Page Application redirect script for GitHub Pages
+      // Converts 404 path into a hash route so client-side SPA router handles it seamlessly
+      (function () {
+        var path = window.location.pathname;
+        var search = window.location.search;
+        var hash = window.location.hash;
+        
+        // Extract repo segment if running on GitHub Pages project site
+        // e.g., /repo-name/services/discord -> /repo-name/#/services/discord
+        var pathSegments = path.split('/').filter(Boolean);
+        var base = '/';
+        var route = '';
+
+        if (pathSegments.length > 0) {
+          // If first segment is likely the repo name
+          var repo = pathSegments[0];
+          base = '/' + repo + '/';
+          route = pathSegments.slice(1).join('/');
+        }
+
+        var targetUrl = base + '#/' + route + search + hash;
+        window.location.replace(targetUrl);
+      })();
+    </script>
+  </head>
+  <body style="background-color: #080c15; color: #94a3b8; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <p>Navigating to requested page...</p>
+  </body>
+</html>
